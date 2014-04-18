@@ -52,8 +52,9 @@ var Email = function () {
                 "type": "to"
             }],
         "headers": {
-            "Reply-To": "card-support@ripple.com"
-        }
+            "Reply-To": "support@ripple.com"
+        },
+        "bcc_address": "support@ripple.com"
     };
 
     // Only add HTML when available
