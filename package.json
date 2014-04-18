@@ -19,6 +19,8 @@
     "nconf": "~0.6.9",
     "db-migrate": "~0.6.4",
     "pg": "~3.0.3",
-    "crypto": "0.0.3"
+    "crypto": "0.0.3",
+    "mandrill-api": "~1.0.39",
+    "handlebars": "~2.0.0-alpha.2"
   }
 }

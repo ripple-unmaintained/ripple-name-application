@@ -2,6 +2,7 @@ var express           = require('express');
 var applications      = require('./models/applications');
 var nconf             = require('./config/nconf');
 var crypto            = require('crypto');
+var mandrill          = require('./mandrill');
 
 var app           = express();
 var host          = nconf.get('HOST');
@@ -50,6 +51,9 @@ app.post('/v1/application', function(req, res){
       respondError(res, err);
     } else {
       respondSuccess(res, 'application', application);
+      mandrill.applicationReceived(req.body, function(result) {
+        console.log(result);
+      });
     }
   });
 
