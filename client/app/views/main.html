@@ -1,0 +1,57 @@
+<div class="header">
+    <h3 class="text-muted">Ripple Name Application</h3>
+</div>
+
+<div class="row marketing">
+    <form name="rippleNameForm" ng-submit="submitForm(rippleNameForm.$valid)" novalidate role="form">
+        <div class="form-group" ng-class="{ 'has-error' : submitted && !rippleName.full_name.$invalid }">
+            <label for="full_name">Full Name<sup>*</sup></label>
+            <input  class="form-control" required type="text" ng-model="rippleName.full_name" name="full_name">
+            <p ng-show="submitted && !full_name" class="help-block">Your name is required.</p>
+        </div>
+        <div class="form-group">
+            <label for="organization">Organization</label>
+            <input  class="form-control" type="text" ng-model="rippleName.organization" ng-model="rippleName.organization" name="organization">
+
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : submitted && !rippleName.email.$invalid }">
+            <label for="email">Email<sup>*</sup></label>
+            <input  class="form-control" required type="email" ng-model="rippleName.email" name="email">
+            <p ng-show="submitted && !rippleName.email" class="help-block">A valid email address is required.</p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : submitted && !rippleName.phone.$invalid }">
+            <label for="tel">Phone<sup>*</sup></label>
+            <input  class="form-control" required type="tel" ng-model="rippleName.phone" name="phone">
+            <p ng-show="submitted && !rippleName.phone && !rippleName.phone.$pristine" class="help-block">This feild is required.</p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : submitted && !rippleName.website.$invalid }">
+            <label for="website">Website<sup>*</sup></label>
+            <input  class="form-control" required type="url" ng-model="rippleName.website" name="website">
+            <p ng-show="submitted && !rippleName.website && !rippleName.website.$pristine" class="help-block">This feild is required.</p>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && !rippleName.ripplename.$invalid }">
+            <label for="ripple_name">Ripple name<sup>*</sup></label>
+            <input  class="form-control" required ng-minlenth="3" type="text" ng-model="rippleName.ripple_name" name="ripplename">
+            <p ng-show="submitted && !rippleName.ripple_name && !rippleName.ripple_name.$pristine" class="help-block">This feild is required.</p>
+            <p ng-show="submitted && rippleName.ripple_name.$error.minlength" class="help-block">Ripple name has to be at lease three characters long.</p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : submitted && !rippleName.ripplename.$invalid }">
+            <label for="ripple_address">Ripple address<sup>*</sup></label>
+            <input  class="form-control" required ng-minlenth="3" type="text" ng-model="rippleName.ripple_address" name="ripplename">
+            <p ng-show="submitted && !rippleName.ripple_address && !rippleName.ripple_address.$pristine" class="help-block">This feild is required.</p>
+        </div>
+        <div class="form-group">
+            <label for="justification">Justification<sup>*</sup></label>
+            <textarea class="form-control" required ng-model="rippleName.justification" name="justification"></textarea>
+            <p ng-show="submitted && !rippleName.justification && !rippleName.justification.$pristine" class="help-block">This feild is required.</p>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Submit</button>
+
+    </form>
+</div>
+
+<div class="footer">
+
+</div>

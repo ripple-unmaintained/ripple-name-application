@@ -1,0 +1,16 @@
+form {
+    border: none !important;
+}
+.ng-invalid {
+    border: 1px red solid;
+}
+.ng-valid {
+    /*border: 1px #00ff91 solid;*/
+}
+.ng-invalid, .ng-invalid-required, .ng-valid {
+    border: 1px #cfcfcf solid;
+}
+.has-errors input{
+    border: 1px red solid;
+    color: red;
+}
