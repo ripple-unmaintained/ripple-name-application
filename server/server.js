@@ -43,16 +43,14 @@ if ('heroku' === process.env.SERVICE_PLATFORM && SSL) {
 }
 
 app.post('/v1/application', function(req, res){
-  console.log(req.get('User-Agent'));
-  console.log(req.body);
 
   createApplication(req.body, function(err, application) {
     if (err) {
       respondError(res, err);
     } else {
       respondSuccess(res, 'application', application);
-      mandrill.applicationReceived(req.body, function(result) {
-        console.log(result);
+      mandrill.applicationReceived(req.body, function(error, result) {
+        console.log('|| mandril send:', error ? JSON.stringify(error) : error, result ? JSON.stringify(result) : result);
       });
     }
   });
@@ -86,15 +84,13 @@ function respondError(res, error, message, statusCode) {
 }
 
 function createApplication(opts, fn) {
-  console.log(opts);
+  console.log('|| createApplication:', JSON.stringify(opts));
 
   // generate destination tag
   opts.destination_tag = crypto.randomBytes(32).toString('hex');
 
   var model = applications.build(opts);
   var errors = model.validate();
-
-  console.log(errors);
 
   if (errors) {
     fn(errors, null);
