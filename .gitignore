@@ -1,5 +1,6 @@
 .DS_Store
 .nodemonignore
+.idea
 config.json
 node_modules
 node.pid
