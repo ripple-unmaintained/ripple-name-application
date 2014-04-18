@@ -16,6 +16,7 @@
   "dependencies": {
     "sequelize": "~1.7.2",
     "express": "3.5.1",
-    "nconf": "~0.6.9"
+    "nconf": "~0.6.9",
+    "db-migrate": "~0.6.4"
   }
 }
