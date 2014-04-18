@@ -1,9 +1,17 @@
 ripple-name-application
 =======================
 
+#### setup
+
+`npm install`
+
 `createdb -O postgres ripple_name_application`
 
 `export DATABASE_URL=postgres://postgres:postgres@localhost:5432/ripple_name_application`
+
+`cd server/`
+
+`db-migrate up`
 
 #### POST /v1/application
 ```
