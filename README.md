@@ -22,8 +22,7 @@ ripple-name-application
   phone: '6501235631',
   ripple_address: '1jasidjfij13asdfija',
   ripple_name: 'h23',
-  justification: '1231412312',
-  destination_tag: '1238asdjfa8sudfa'
+  justification: '1231412312'
 }
 ```
 
