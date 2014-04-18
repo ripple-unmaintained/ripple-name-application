@@ -1,0 +1,7 @@
+.DS_Store
+.nodemonignore
+config.json
+node_modules
+node.pid
+*swp
+newrelic_agent.log

@@ -1,0 +1,24 @@
+{
+  "name": "ripple-name-application",
+  "version": "0.0.1",
+  "description": "Apply for Ripple name",
+  "main": "node server/server.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ripple/ripple-name-application.git"
+  },
+  "author": "geert@ripple.com, abiy@ripple.com",
+  "homepage": "https://github.com/ripple/ripple-name-application",
+  "dependencies": {
+    "sequelize": "~1.7.2",
+    "express": "3.5.1",
+    "nconf": "~0.6.9",
+    "db-migrate": "~0.6.4",
+    "pg": "~3.0.3",
+    "crypto": "0.0.3"
+  }
+}
