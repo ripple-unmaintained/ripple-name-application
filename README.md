@@ -17,12 +17,14 @@ ripple-name-application
 ```
 {
   full_name: 'Henk Test',
-  organization: 'Company',
+  organization: 'Company', // optional
   email: 'henk@1234.com',
   phone: '6501235631',
   ripple_address: '1jasidjfij13asdfija',
   ripple_name: 'h23',
-  justification: '1231412312'
+  justification: '1231412312',
+  website: 'http://www.website.com' // optional
+  
 }
 ```
 
