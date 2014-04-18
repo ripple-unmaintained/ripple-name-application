@@ -1,6 +1,7 @@
 var express           = require('express');
 var applications      = require('./models/applications');
 var nconf             = require('./config/nconf');
+var crypto            = require('crypto');
 
 var app           = express();
 var host          = nconf.get('HOST');
@@ -82,6 +83,9 @@ function respondError(res, error, message, statusCode) {
 
 function createApplication(opts, fn) {
   console.log(opts);
+
+  // generate destination tag
+  opts.destination_tag = crypto.randomBytes(32).toString('hex');
 
   var model = applications.build(opts);
   var errors = model.validate();
