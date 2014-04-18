@@ -1,0 +1,14 @@
+{
+  "development": {
+    "ENV": "DATABASE_URL",
+    "native": true
+  },
+  "staging": {
+    "ENV": "DATABASE_URL",
+    "native": true
+  },
+  "production": {
+    "ENV": "DATABASE_URL",
+    "native": true
+  }
+}
