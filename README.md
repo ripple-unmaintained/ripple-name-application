@@ -41,3 +41,16 @@ RESPONSE
 }
 ```
 
+#### validation
+
+case fail
+```
+{
+  "success": false,
+  "error": {
+    "email": [
+      "Validation isEmail failed: email"
+    ]
+  }
+}
+```
