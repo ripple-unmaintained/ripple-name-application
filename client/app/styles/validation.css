@@ -1,16 +1,19 @@
 form {
     border: none !important;
 }
-.ng-invalid {
-    border: 1px red solid;
+
+.ng-dirty.ng-valid.ng-valid-required{
+    border: 1px #cfcfcf solid !important;
 }
-.ng-valid {
-    /*border: 1px #00ff91 solid;*/
+.ng-invalid.ng-invalid-required.ng-invalid {
+    border: 1px #cf0400 solid;
 }
-.ng-invalid, .ng-invalid-required, .ng-valid {
-    border: 1px #cfcfcf solid;
+input.ng-pristine, textarea.ng-pristine {
+    border: 1px #cfcfcf solid !important;
+}
+.ng-dirty.ng-valid-required.ng-invalid-email {
+    border: 1px #cf0400 solid;
 }
 .has-errors input{
-    border: 1px red solid;
     color: red;
 }
