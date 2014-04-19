@@ -3,7 +3,6 @@
 var rippleNames = angular
     .module('clientApp', [
         'ngResource',
-        'ngSanitize',
         'ngRoute'
     ]);
 
