@@ -1,4 +1,4 @@
-Sequelize = require('sequelize')
+Sequelize = require('sequelize');
 pg = require('pg').native;
 
 var databaseUrl = process.env.DATABASE_URL;

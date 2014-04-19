@@ -1,7 +1,7 @@
-var db            = require('./sequelize.js')
+var db            = require('./sequelize.js');
 var Sequelize     = require('sequelize');
 
-var AdminUsers = db.define('applications',
+var Applications = db.define('applications',
   {
     id:             { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
 
@@ -73,4 +73,4 @@ var AdminUsers = db.define('applications',
 
   });
 
-module.exports = AdminUsers;
+module.exports = Applications;
