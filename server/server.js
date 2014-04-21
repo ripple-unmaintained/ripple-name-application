@@ -68,7 +68,12 @@ app.post('/v1/application', function(req, res){
 });
 
 app.get('/v1/validate', function(req, res) {
-  respondSuccess(res, 'validate', {});
+  if (!topdomains.contains(req.query.ripple_name)) {
+    respondSuccess(res);
+  } else {
+    respondError(res, 'matches a top domain');
+  }
+
 });
 
 
@@ -83,7 +88,9 @@ function respondSuccess(res, propertyName, property, statusCode) {
     success: true
   };
 
-  response[propertyName] = property;
+  if (propertyName) {
+    response[propertyName] = property;
+  }
   res.json(statusCode ? statusCode : 200, response);
 }
 
