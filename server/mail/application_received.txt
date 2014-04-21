@@ -7,7 +7,7 @@ Destination tag: {{ destination_tag }}
 Amount: {{ payment_amount }}
 
 Or use the following link
-{{ payment_client_url }}
+{{{ payment_client_url }}}
 
 Please contact support@ripple.com and we’ll be happy to sort out the issue for you.
 
