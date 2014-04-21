@@ -56,8 +56,14 @@
 
             <div class="form-group">
                 <label for="justification">Justification<sup>*</sup></label>
+                <p>{{model.captcha}}</p>
                 <textarea class="form-control" required ng-model="rippleName.justification" name="justification"></textarea>
                 <p ng-show="rippleNameForm.justification.$invalid && !rippleNameForm.justification.$pristine" class="help-block">This field is required.</p>
+            </div>
+
+            <div class="form-group">
+                <label>Captcha*</label>
+                <div re-captcha ng-model="user.captcha"></div>
             </div>
 
             <button class="btn btn-primary" ng-disabled="rippleNameForm.$invalid" type="submit">
@@ -68,7 +74,7 @@
     </form>
 
     <div class="alert alert-success" ng-show="submittedSuccessfully">
-        <h4>Your Application form has been successfully submitted!</h4>
+        <h4>Your application form has been successfully submitted!</h4>
     </div>
 </div>
 
