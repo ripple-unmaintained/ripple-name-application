@@ -71,7 +71,7 @@ app.get('/v1/validate', function(req, res) {
   if (!topdomains.contains(req.query.ripple_name)) {
     respondSuccess(res);
   } else {
-    respondError(res, 'matches a top domain');
+    respondError(res, 'domain exists', undefined, 200);
   }
 
 });
