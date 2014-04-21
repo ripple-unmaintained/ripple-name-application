@@ -7,51 +7,63 @@
         <div ng-show="submitErrors.length > 0" class="alert alert-error">
             <p ng-repeat="err in submitErrors">{{err}}</p>
         </div>
-        <fieldset ng-disabled="{{isSubmitting}}">
-            <div class="form-group" ng-class="{ 'has-error' : submitted && !rippleName.full_name }">
+        <fieldset ng-disabled="isSubmitting">
+            <div class="form-group">
                 <label for="full_name">Full Name<sup>*</sup></label>
                 <input  class="form-control" required type="text" ng-model="rippleName.full_name" name="full_name">
                 <p ng-show="rippleNameForm.full_name.$invalid && !rippleNameForm.full_name.$pristine " class="help-block">Your name is required.</p>
             </div>
+
             <div class="form-group">
                 <label for="organization">Organization</label>
-                <input  class="form-control" type="text" ng-model="rippleName.organization" ng-model="rippleName.organization" name="organization">
-
+                <input  class="form-control" type="text" ng-model="rippleName.organization" name="organization">
             </div>
-            <div class="form-group" ng-class="{ 'has-error' : rippleName.email.$invalid && !rippleName.email }">
+
+            <div class="form-group">
                 <label for="email">Email<sup>*</sup></label>
                 <input  class="form-control" required type="email" ng-model="rippleName.email" name="email">
-                <p ng-show="rippleNameForm.email.$invalid && !rippleNameForm.email.$prestine" class="help-block">A valid email address is required.</p>
-            </div>
-            <div class="form-group" ng-class="{ 'has-error' : submitted && !rippleName.phone }">
-                <label for="tel">Phone<sup>*</sup></label>
-                <input  class="form-control" required type="tel" ng-model="rippleName.phone" name="phone">
-                <p ng-show="rippleNameForm.phone.$invalid && !rippleNameForm.phone.$pristine" class="help-block">This feild is required.</p>
-            </div>
-            <div class="form-group" ng-class="{ 'has-error' : submitted && !rippleName.website }">
-                <label for="website">Website</label>
-                <input  class="form-control" type="url" ng-model="rippleName.website" name="website">
-                <p ng-show="rippleNameForm.website.$invalid && !rippleNameForm.website.$pristine" class="help-block">This feild is required.</p>
-            </div>
-
-            <div class="form-group" ng-class="{ 'has-error' : submitted && !rippleName.ripple_name }">
-                <label for="ripple_name">Ripple name<sup>*</sup></label>
-                <input  class="form-control" required ng-minlenth="3" type="text" ng-model="rippleName.ripple_name" name="ripple_name">
-                <p ng-show="rippleNameForm.ripple_name.$invalid && !rippleNameForm.ripple_name.$pristine" class="help-block">This feild is required.</p>
-                <p ng-show="rippleNameForm.ripple_name.$error.minlength" class="help-block">Ripple name has to be at lease three characters long.</p>
-            </div>
-            <div class="form-group" ng-class="{ 'has-error' : submitted && !rippleName.ripple_address }">
-                <label for="ripple_address">Ripple address<sup>*</sup></label>
-                <input  class="form-control" required ng-minlenth="3" type="text" ng-model="rippleName.ripple_address" name="ripple_address">
-                <p ng-show="rippleNameForm.ripple_address.$invalid && !rippleNameForm.ripple_address.$pristine" class="help-block">This feild is required.</p>
+                <div class="error" ng-show="rippleNameForm.email.$dirty && rippleNameForm.email.$invalid">
+                    <p ng-show="rippleNameForm.email.$error.required" class="help-block">An email address is required.</p>
+                    <p ng-show="rippleNameForm.email.$error.email" class="help-block">Please enter a valid email address.</p>
+                </div>
             </div>
             <div class="form-group">
-                <label for="justification">Justification<sup>*</sup></label>
-                <textarea class="form-control" required ng-model="rippleName.justification" name="justification"></textarea>
-                <p ng-show="rippleNameForm.justification.$invalid && !rippleNameForm.justification.$pristine" class="help-block">This feild is required.</p>
+                <label for="tel">Phone<sup>*</sup></label>
+                <input  class="form-control" required type="tel" ng-model="rippleName.phone" name="phone">
+                <p ng-show="rippleNameForm.phone.$invalid && !rippleNameForm.phone.$pristine" class="help-block">This field is required.</p>
             </div>
 
-            <button class="btn btn-primary" ng-disabled="rippleNameForm.$invalid" type="submit">Submit</button>
+            <div class="form-group">
+                <label for="website">Website</label>
+                <input  class="form-control" type="url" ng-model="rippleName.website" name="website" null-if-empty>
+                <p ng-show="rippleNameForm.website.$invalid && !rippleNameForm.website.$pristine" class="help-block">Please enter a valid url</p>
+            </div>
+
+            <div class="form-group">
+                <label for="ripple_name">Ripple name<sup>*</sup></label>
+                <input  class="form-control" required ngtions="{ updateOn: 'blur' }" ng-model="rippleName.ripple_name" name="ripple_name">
+                <div class="error" ng-show="rippleNameForm.ripple_name.$dirty && rippleNameForm.ripple_name.$invalid">
+                    <p ng-show="rippleNameForm.ripple_name.$error.required" class="help-block">Please enter your desired Ripple name</p>
+                    <p ng-show="rippleNameForm.ripple_name.$error.minlength">Ripple name has to be at lease three characters long.</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="ripple_address">Ripple address<sup>*</sup></label>
+                <input  class="form-control" required ngtions="{ updateOn: 'blur' }" ng-model="rippleName.ripple_address" name="ripple_address">
+                <p ng-show="rippleNameForm.ripple_address.$invalid && !rippleNameForm.ripple_address.$pristine" class="help-block">This field is required.</p>
+            </div>
+
+            <div class="form-group">
+                <label for="justification">Justification<sup>*</sup></label>
+                <textarea updateOn: 'blur' }" ng-model="rippleName.justification" name="justification"></textarea>
+                <p ng-show="rippleNameForm.justification.$invalid && !rippleNameForm.justification.$pristine" class="help-block">This field is required.</p>
+            </div>
+
+            <button class="btn btn-primary" ng-disabled="rippleNameForm.$invalid" type="submit">
+                <span ng-show="isSubmitting">Submitting ...</span>
+                <span ng-hide="isSubmitting">Submit</span>
+            </button>
         </fieldset>
     </form>
 
