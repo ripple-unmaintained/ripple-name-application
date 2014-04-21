@@ -68,10 +68,6 @@ app.post('/v1/application', function(req, res){
 });
 
 app.get('/v1/validate', function(req, res) {
-  console.log(req.query);
-
-  console.log(topdomains.contains(req.query.ripple_name));
-
   respondSuccess(res, 'validate', {});
 });
 
@@ -113,6 +109,17 @@ function createApplication(opts, fn) {
 
   var model = applications.build(opts);
   var errors = model.validate();
+
+  if (topdomains.contains(opts.ripple_name)) {
+    var rippleNameError = ['Validation popular domain failed: ripple_name'];
+    if (errors) {
+      errors.ripple_name = rippleNameError;
+    } else {
+      errors = {
+        ripple_name : rippleNameError
+      }
+    }
+  }
 
   if (errors) {
     fn(errors, null);
