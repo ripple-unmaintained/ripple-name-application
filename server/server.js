@@ -2,6 +2,7 @@ var express           = require('express');
 var applications      = require('./models/applications');
 var nconf             = require('./config/nconf');
 var crypto            = require('crypto');
+var biguint           = require('biguint-format');
 var mandrill          = require('./mandrill');
 
 var app           = express();
@@ -99,7 +100,7 @@ function createApplication(opts, fn) {
   console.log('|| createApplication:', JSON.stringify(opts));
 
   // generate destination tag
-  opts.destination_tag = crypto.randomBytes(32).toString('hex');
+  opts.destination_tag = biguint(crypto.randomBytes(4), 'dec');
 
   var model = applications.build(opts);
   var errors = model.validate();
