@@ -9,6 +9,9 @@ var host          = nconf.get('HOST');
 var port          = nconf.get('PORT');
 var SSL           = nconf.get('SSL');
 
+var rippleDestinationAddress = '1234567890abcdefgh'
+var ripplePayAmount = 100; // XRP
+
 // if true so always
 if (true || 'development' === process.env.NODE_ENV || 'test' === process.env.NODE_ENV) {
   app.use(express.logger('dev'));
@@ -17,7 +20,6 @@ if (true || 'development' === process.env.NODE_ENV || 'test' === process.env.NOD
 
 // set up middleware
 app.disable('x-powered-by');
-
 
 app.use(function(req,res,next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -49,7 +51,13 @@ app.post('/v1/application', function(req, res){
       respondError(res, err);
     } else {
       respondSuccess(res, 'application', application);
-      mandrill.applicationReceived(req.body, function(error, result) {
+
+      emailOpts = application;
+      emailOpts.payment_to_address = rippleDestinationAddress;
+      emailOpts.payment_amount = ripplePayAmount;
+      emailOpts.payment_client_url = constructClientPayUrl(rippleDestinationAddress, application.destination_tag, ripplePayAmount);
+
+      mandrill.applicationReceived(emailOpts, function(error, result) {
         console.log('|| mandril send:', error ? JSON.stringify(error) : error, result ? JSON.stringify(result) : result);
       });
     }
@@ -57,6 +65,10 @@ app.post('/v1/application', function(req, res){
 
 });
 
+
+function constructClientPayUrl(destinationAddress, destinationTag, amount) {
+  return ['https://ripple.com//send?to=', destinationAddress, '&dt=', destinationTag ,'&amount=', amount].join('');
+}
 
 function respondSuccess(res, propertyName, property, statusCode) {
 
