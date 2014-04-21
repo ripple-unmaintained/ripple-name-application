@@ -1,4 +1,5 @@
 var express           = require('express');
+var topdomains        = require('./topdomains');
 var applications      = require('./models/applications');
 var nconf             = require('./config/nconf');
 var crypto            = require('crypto');
@@ -64,6 +65,14 @@ app.post('/v1/application', function(req, res){
     }
   });
 
+});
+
+app.get('/v1/validate', function(req, res) {
+  console.log(req.query);
+
+  console.log(topdomains.contains(req.query.ripple_name));
+
+  respondSuccess(res, 'validate', {});
 });
 
 

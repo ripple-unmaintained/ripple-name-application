@@ -22,6 +22,7 @@
     "crypto": "0.0.3",
     "mandrill-api": "~1.0.39",
     "handlebars": "~2.0.0-alpha.2",
-    "biguint-format": "~0.2.0"
+    "biguint-format": "~0.2.0",
+    "csv": "~0.3.7"
   }
 }
