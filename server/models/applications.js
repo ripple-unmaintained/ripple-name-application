@@ -52,7 +52,8 @@ var Applications = db.define('applications',
                       validate: {
                         notNull: true,
                         notEmpty: true,
-                        len: 3
+                        isAlphanumeric: true,
+                        len: [3, 15]
                       }
                     },
 
