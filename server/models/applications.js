@@ -53,7 +53,12 @@ var Applications = db.define('applications',
                         notNull: true,
                         notEmpty: true,
                         isAlphanumeric: true,
-                        len: [3, 15]
+                        len: [3, 15],
+                        isNotANumber: function(value) {
+                          if (!isNaN(value)) {
+                            throw new Error('Validation not a number failed: ripple_name');
+                          }
+                        }
                       }
                     },
 
