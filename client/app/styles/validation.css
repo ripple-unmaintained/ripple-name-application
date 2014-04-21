@@ -2,7 +2,7 @@ form {
     border: none !important;
 }
 
-.ng-dirty.ng-valid.ng-valid-required{
+input.ng-dirty.ng-valid.ng-valid-required{
     border: 1px #cfcfcf solid !important;
 }
 .ng-invalid.ng-invalid-required.ng-invalid {
