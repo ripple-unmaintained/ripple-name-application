@@ -1,18 +1,6 @@
 'use strict';
 
-rippleNames.directive('nullIfEmpty', [function() {
-        return {
-            require: 'ngModel',
-            link: function(scope, elm, attr, ctrl) {
-                ctrl.$parsers.unshift(function(value) {
-                    return value === '' ? null : value;
-                });
-            }
-        };
-    }]
-);
-
-rippleNames.controller('MainCtrl', function ($scope, $http) {
+rippleNames.controller('MainCtrl', function ($scope, $http, reCAPTCHA) {
     //form status
     $scope.isSubmitting = false;
     $scope.submittedSuccessfully = false;
