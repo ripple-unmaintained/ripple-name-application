@@ -3,8 +3,13 @@
 var rippleNames = angular
     .module('clientApp', [
         'ngResource',
-        'ngRoute'
+        'ngRoute',
+        'reCAPTCHA'
     ]);
+
+rippleNames.config(function (reCAPTCHAProvider) {
+    reCAPTCHAProvider.setPublicKey('6LdEJfISAAAAAMYNSPq0RwTDBTOPxh8d40u744GJ');
+});
 
 rippleNames.config(function ($routeProvider) {
     $routeProvider
