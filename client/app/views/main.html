@@ -41,7 +41,7 @@
 
             <div class="form-group">
                 <label for="ripple_name">Ripple name<sup>*</sup></label>
-                <input  class="form-control" required ngtions="{ updateOn: 'blur' }" ng-model="rippleName.ripple_name" name="ripple_name">
+                <input  class="form-control" required ng-minlength="3" type="text" ng-model="rippleName.ripple_name" name="ripple_name">
                 <div class="error" ng-show="rippleNameForm.ripple_name.$dirty && rippleNameForm.ripple_name.$invalid">
                     <p ng-show="rippleNameForm.ripple_name.$error.required" class="help-block">Please enter your desired Ripple name</p>
                     <p ng-show="rippleNameForm.ripple_name.$error.minlength">Ripple name has to be at lease three characters long.</p>
@@ -50,13 +50,13 @@
 
             <div class="form-group">
                 <label for="ripple_address">Ripple address<sup>*</sup></label>
-                <input  class="form-control" required ngtions="{ updateOn: 'blur' }" ng-model="rippleName.ripple_address" name="ripple_address">
+                <input  class="form-control" required ng-minlenth="3" type="text" ng-model="rippleName.ripple_address" name="ripple_address">
                 <p ng-show="rippleNameForm.ripple_address.$invalid && !rippleNameForm.ripple_address.$pristine" class="help-block">This field is required.</p>
             </div>
 
             <div class="form-group">
                 <label for="justification">Justification<sup>*</sup></label>
-                <textarea updateOn: 'blur' }" ng-model="rippleName.justification" name="justification"></textarea>
+                <textarea class="form-control" required ng-model="rippleName.justification" name="justification"></textarea>
                 <p ng-show="rippleNameForm.justification.$invalid && !rippleNameForm.justification.$pristine" class="help-block">This field is required.</p>
             </div>
 
