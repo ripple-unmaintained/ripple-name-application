@@ -3,7 +3,7 @@
 </div>
 
 <div class="ng-scope instructions header">
-    <p><strong>Applying for a name and completing the payment does not guarantee that the Ripple name will be claimable.</strong></p>
+    <h4>Applying for a name and completing the payment does not guarantee that the Ripple name will be claimable.</h4>
     <p>Applications must show some previous or intended use of the name, which can include, but is not limited to:</p>
     <ul>
         <li>Having a registered business, or doing-business-as, with that name.</li>
@@ -19,6 +19,7 @@
         <li>Oft used n-grams (from Google’s n-gram database)</li>
         <li>Current [name]@ripple.com addresses</li>
     </ul>
+    <h4>Application Fee</h4>
     <p>After completing this form, send 10,000XRP to rrrrrrrrrrrrrrrrrNAMEtxvNvQ with your generated destination tag.</p>
 </div>
 
@@ -60,7 +61,7 @@
             </div>
 
             <div class="form-group">
-                <label for="ripple_name">Ripple name<sup>*</sup></label>
+                <label for="ripple_name">Requested Ripple name<sup>*</sup></label>
                 <input  class="form-control" required check-domain ng-minlength="3" ng-maxlength="15" ng-pattern="/^(?![0-9]*$)[a-zA-Z0-9]+$/" type="text" ng-model="rippleName.ripple_name" name="ripple_name">
                 <div class="error" ng-show="rippleNameForm.ripple_name.$dirty && rippleNameForm.ripple_name.$invalid">
                     <p ng-show="rippleNameForm.ripple_name.$error.required" class="help-block">Please enter your desired Ripple name</p>
@@ -72,7 +73,7 @@
             </div>
 
             <div class="form-group">
-                <label for="ripple_address">Ripple address<sup>*</sup></label>
+                <label for="ripple_address">Current Ripple address<sup>*</sup></label>
                 <input  class="form-control" required ng-minlenth="3" type="text" ng-model="rippleName.ripple_address" name="ripple_address">
                 <p ng-show="rippleNameForm.ripple_address.$invalid && !rippleNameForm.ripple_address.$pristine" class="help-block">This field is required.</p>
             </div>
