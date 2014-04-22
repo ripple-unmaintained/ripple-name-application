@@ -21,6 +21,8 @@ exports.up = function(db, callback) {
 
     destination_tag: { type: 'string', notNull: true},
 
+    paid:           { type: 'boolean', defaultValue: false },
+
     createdAt:      { type: 'datetime', notNull: true },
     updatedAt:      { type: 'datetime' }
 
