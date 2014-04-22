@@ -1,6 +1,5 @@
-Dear {{ full_name }},
-
-Your application for the Ripple name '{{ ripple_name }}' has been sucessfully received. To fulfill the application, please make the payment with the following details:
+Hello {{ full_name }},
+Thank you for your application for the Ripple name '{{ ripple_name }}'. To complete the application, please make the payment with the following details:
 
 Destination address: {{ payment_to_address }}
 Destination tag: {{ destination_tag }}
@@ -9,7 +8,7 @@ Amount: {{ payment_amount }}
 Or use the following link
 {{{ payment_client_url }}}
 
-Please contact support@ripple.com and we’ll be happy to sort out the issue for you.
+We will begin processing applications in early May and may request additional information. If you have further questions, please contact support@ripple.com.
 
-Very best,
-The Ripple Name Team
+Regards,
+Ripple Labs Team
