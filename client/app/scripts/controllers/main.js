@@ -1,13 +1,14 @@
 'use strict';
 
-rippleNames.controller('MainCtrl', function ($scope, $http, reCAPTCHA) {
+rippleNames.controller('MainCtrl', function ($scope, $rootScope, $http, reCAPTCHA) {
     //form status
     $scope.isSubmitting = false;
     $scope.submittedSuccessfully = false;
+
     $scope.submitForm = function(isValid){
         //form status
         $scope.submitErrors = [];
-        $scope.rippleName = {};
+        $scope.captchaError;
 
         if(isValid){
             $scope.isSubmitting = true;
@@ -15,7 +16,11 @@ rippleNames.controller('MainCtrl', function ($scope, $http, reCAPTCHA) {
         }
 
         function successCallback(data){
-            if(data.success) {
+            $scope.isSubmitting = false;
+
+            if(data.captchaError) {
+                $scope.captchaError = true;
+            } else if(data.success) {
                 $scope.submittedSuccessfully = true;
             }
         }
