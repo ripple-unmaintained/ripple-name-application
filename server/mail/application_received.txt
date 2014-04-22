@@ -3,7 +3,7 @@ Thank you for your application for the Ripple name '{{ ripple_name }}'. To compl
 
 Destination address: {{ payment_to_address }}
 Destination tag: {{ destination_tag }}
-Amount: {{ payment_amount }}
+Amount: {{ payment_amount }} XRP
 
 Or use the following link
 {{{ payment_client_url }}}
