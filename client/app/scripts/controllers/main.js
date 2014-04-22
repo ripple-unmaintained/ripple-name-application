@@ -4,11 +4,10 @@ rippleNames.controller('MainCtrl', function ($scope, $http, reCAPTCHA) {
     //form status
     $scope.isSubmitting = false;
     $scope.submittedSuccessfully = false;
-
     $scope.submitForm = function(isValid){
-
         //form status
         $scope.submitErrors = [];
+        $scope.rippleName = {};
 
         if(isValid){
             $scope.isSubmitting = true;
@@ -16,9 +15,11 @@ rippleNames.controller('MainCtrl', function ($scope, $http, reCAPTCHA) {
         }
 
         function successCallback(data){
-            $scope.submittedSuccessfully = true;
+            if(data.success) {
+                $scope.submittedSuccessfully = true;
+            }
         }
-        
+
         function errorCallback(data){
             if (!data.success){
                 $scope.isSubmitting = false;
