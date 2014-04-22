@@ -62,9 +62,11 @@
                 <p ng-show="rippleNameForm.justification.$invalid && !rippleNameForm.justification.$pristine" class="help-block">This field is required.</p>
             </div>
 
+            <p class="help-block" ng-show="captchaError">Captcha incorrect, please re-enter.</p>
+
             <div class="form-group">
                 <label>Captcha*</label>
-                <div re-captcha ng-model="user.captcha"></div>
+                <div re-captcha ng-model="rippleName.captcha"></div>
             </div>
 
             <button class="btn btn-primary" ng-disabled="rippleNameForm.$invalid" type="submit">
