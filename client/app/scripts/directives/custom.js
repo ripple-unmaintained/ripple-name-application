@@ -9,3 +9,14 @@ rippleNames.directive('nullIfEmpty', [function() {
         };
     }]
 );
+
+rippleNames.directive('checkDomain', [function(){
+    return{
+        require: 'ngModel',
+        link: function(scope, elem, attr, ctrl) {
+            elem.bind('blur', function(){
+                 scope.checkDomain(elem.val());
+            });
+        }
+    }
+}]);
