@@ -5,14 +5,18 @@ var nconf             = require('./config/nconf');
 var crypto            = require('crypto');
 var biguint           = require('biguint-format');
 var mandrill          = require('./mandrill');
+var Recaptcha         = require('recaptcha').Recaptcha;
 
 var app           = express();
 var host          = nconf.get('HOST');
 var port          = nconf.get('PORT');
 var SSL           = nconf.get('SSL');
 
-var rippleDestinationAddress = '1234567890abcdefgh'
+var rippleDestinationAddress = '1234567890abcdefgh';
 var ripplePayAmount = 100; // XRP
+
+var CAPTCHA_PRIVATE_KEY = process.env.CAPTCHA_PRIVATE_KEY;
+var CAPTCHA_PUBLIC_KEY = nconf.get('CAPTCHA_PUBLIC_KEY');
 
 // if true so always
 if (true || 'development' === process.env.NODE_ENV || 'test' === process.env.NODE_ENV) {
@@ -46,24 +50,44 @@ if ('heroku' === process.env.SERVICE_PLATFORM && SSL) {
   });
 }
 
+
 app.post('/v1/application', function(req, res){
 
-  createApplication(req.body, function(err, application) {
-    if (err) {
-      respondError(res, err);
-    } else {
-      respondSuccess(res, 'application', application);
+  var captchaData = {
+    remoteip:  req.connection.remoteAddress,
+    challenge: req.body.captcha.challenge,
+    response:  req.body.captcha.response
+  };
 
-      emailOpts = application;
-      emailOpts.payment_to_address = rippleDestinationAddress;
-      emailOpts.payment_amount = ripplePayAmount;
-      emailOpts.payment_client_url = constructClientPayUrl(rippleDestinationAddress, application.destination_tag, ripplePayAmount);
+  var recaptcha = new Recaptcha(CAPTCHA_PUBLIC_KEY, CAPTCHA_PRIVATE_KEY, captchaData);
 
-      mandrill.applicationReceived(emailOpts, function(error, result) {
-        console.log('|| mandril send:', error ? JSON.stringify(error) : error, result ? JSON.stringify(result) : result);
+  recaptcha.verify(function(success, error_code) {
+    if(success){
+
+      //Delete captcha object before storing in database
+      delete req.body.captcha;
+      createApplication(req.body, function(err, application) {
+        if (err) {
+          respondError(res, err);
+        } else {
+          respondSuccess(res, 'application', application);
+
+          emailOpts = application;
+          emailOpts.payment_to_address = rippleDestinationAddress;
+          emailOpts.payment_amount = ripplePayAmount;
+          emailOpts.payment_client_url = constructClientPayUrl(rippleDestinationAddress, application.destination_tag, ripplePayAmount);
+
+          mandrill.applicationReceived(emailOpts, function(error, result) {
+            console.log('|| mandril send:', error ? JSON.stringify(error) : error, result ? JSON.stringify(result) : result);
+          });
+        }
       });
+    } else {
+      res.json({captchaError: true, error: error_code});
     }
   });
+
+
 
 });
 
@@ -108,15 +132,17 @@ function respondError(res, error, message, statusCode) {
   res.json(statusCode ? statusCode : 500, response);
 }
 
+
 function createApplication(opts, fn) {
   console.log('|| createApplication:', JSON.stringify(opts));
+
 
   // generate destination tag
   opts.destination_tag = biguint(crypto.randomBytes(4), 'dec');
 
   var model = applications.build(opts);
   var errors = model.validate();
-
+  console.log('post', opts);
   if (topdomains.contains(opts.ripple_name)) {
     var rippleNameError = ['Validation popular domain failed: ripple_name'];
     if (errors) {
@@ -127,6 +153,20 @@ function createApplication(opts, fn) {
       }
     }
   }
+
+  if (errors) {
+    fn(errors, null);
+  } else {
+    model.save().complete(function(err, application){
+      if (!err && application) {
+        fn(null, application.toJSON());
+      } else {
+        var error = JSON.parse(JSON.stringify(err));
+        fn(error, null);
+      }
+    });
+  }
+
 
   // TODO: enable if we want to enforce feedback on paid applications
   // var fn = function(error, appliction) {
@@ -145,18 +185,7 @@ function createApplication(opts, fn) {
   //   });
   // });
 
-  if (errors) {
-    fn(errors, null);
-  } else {
-    model.save().complete(function(err, application){
-      if (!err && application) {
-        fn(null, application.toJSON());
-      } else {
-        var error = JSON.parse(JSON.stringify(err));
-        fn(error, null);
-      }
-    });
-  }
+
 
 };
 
