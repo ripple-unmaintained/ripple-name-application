@@ -12,8 +12,8 @@ var host          = nconf.get('HOST');
 var port          = nconf.get('PORT');
 var SSL           = nconf.get('SSL');
 
-var rippleDestinationAddress = '1234567890abcdefgh';
-var ripplePayAmount = 100; // XRP
+var rippleDestinationAddress = 'rrrrrrrrrrrrrrrrrNAMEtxvNvQ';
+var ripplePayAmount = 10000; // XRP
 
 var CAPTCHA_PRIVATE_KEY = process.env.CAPTCHA_PRIVATE_KEY;
 var CAPTCHA_PUBLIC_KEY = nconf.get('CAPTCHA_PUBLIC_KEY');
