@@ -167,26 +167,6 @@ function createApplication(opts, fn) {
     });
   }
 
-
-  // TODO: enable if we want to enforce feedback on paid applications
-  // var fn = function(error, appliction) {
-  //   // do something!
-  // };
-
-  // // check if there was another application that was already payed
-  // findPaidApplicationsWithName(name, function(err, application) {
-  //   if (err) {
-  //       fn(err, null);
-  //     } else if (application) {
-  //       // a paid authorization has been found
-  //     } else {
-  //       // no paid application with name has been found, we're all good to go
-  //     }
-  //   });
-  // });
-
-
-
 };
 
 function findPaidApplicationsWithName(name, fn) {
