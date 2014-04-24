@@ -6,7 +6,7 @@ rippleNames.controller('MainCtrl', function ($scope, $rootScope, $http, reCAPTCH
     $scope.submittedSuccessfully = false;
 
     $scope.checkDomain = function(name){
-        $http.get('/v1/validate?ripple_name=' + name).success(function(data){
+        $http.get('https://ripple-name.herokuapp.com/v1/validate?ripple_name=' + name).success(function(data){
             if(!data.success) {
                 $scope.rippleNameForm.ripple_name.$setValidity('domainexists', false);
             } else {
@@ -20,10 +20,10 @@ rippleNames.controller('MainCtrl', function ($scope, $rootScope, $http, reCAPTCH
         $scope.submitErrors = [];
         $scope.captchaError;
 
-      
+
         if(isValid){
             $scope.isSubmitting = true;
-            $http.post('/v1/application', $scope.rippleName).success(successCallback).error(errorCallback);
+            $http.post('https://ripple-name.herokuapp.com/v1/application', $scope.rippleName).success(successCallback).error(errorCallback);
         }
 
         function successCallback(data){
