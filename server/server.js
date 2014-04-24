@@ -5,7 +5,6 @@ var nconf             = require('./config/nconf');
 var crypto            = require('crypto');
 var biguint           = require('biguint-format');
 var mandrill          = require('./mandrill');
-var Recaptcha         = require('recaptcha').Recaptcha;
 
 var app           = express();
 var host          = nconf.get('HOST');
@@ -53,41 +52,22 @@ if ('heroku' === process.env.SERVICE_PLATFORM && SSL) {
 
 app.post('/v1/application', function(req, res){
 
-  var captchaData = {
-    remoteip:  req.connection.remoteAddress,
-    challenge: req.body.captcha.challenge,
-    response:  req.body.captcha.response
-  };
-
-  var recaptcha = new Recaptcha(CAPTCHA_PUBLIC_KEY, CAPTCHA_PRIVATE_KEY, captchaData);
-
-  recaptcha.verify(function(success, error_code) {
-    if(success){
-
-      //Delete captcha object before storing in database
-      delete req.body.captcha;
-      createApplication(req.body, function(err, application) {
-        if (err) {
-          respondError(res, err);
-        } else {
-          respondSuccess(res, 'application', application);
-
-          emailOpts = application;
-          emailOpts.payment_to_address = rippleDestinationAddress;
-          emailOpts.payment_amount = ripplePayAmount;
-          emailOpts.payment_client_url = constructClientPayUrl(rippleDestinationAddress, application.destination_tag, ripplePayAmount);
-
-          mandrill.applicationReceived(emailOpts, function(error, result) {
-            console.log('|| mandril send:', error ? JSON.stringify(error) : error, result ? JSON.stringify(result) : result);
-          });
-        }
-      });
+  createApplication(req.body, function(err, application) {
+    if (err) {
+      respondError(res, err);
     } else {
-      res.json({captchaError: true, error: error_code});
+      respondSuccess(res, 'application', application);
+
+      emailOpts = application;
+      emailOpts.payment_to_address = rippleDestinationAddress;
+      emailOpts.payment_amount = ripplePayAmount;
+      emailOpts.payment_client_url = constructClientPayUrl(rippleDestinationAddress, application.destination_tag, ripplePayAmount);
+
+      mandrill.applicationReceived(emailOpts, function(error, result) {
+        console.log('|| mandril send:', error ? JSON.stringify(error) : error, result ? JSON.stringify(result) : result);
+      });
     }
   });
-
-
 
 });
 

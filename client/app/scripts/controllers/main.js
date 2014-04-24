@@ -1,12 +1,12 @@
 'use strict';
 
-rippleNames.controller('MainCtrl', function ($scope, $rootScope, $http, reCAPTCHA) {
+rippleNames.controller('MainCtrl', function ($scope, $rootScope, $http) {
     //form status
     $scope.isSubmitting = false;
     $scope.submittedSuccessfully = false;
 
     $scope.checkDomain = function(name){
-        $http.get('https://ripple-name.herokuapp.com/v1/validate?ripple_name=' + name).success(function(data){
+        $http.get('/v1/validate?ripple_name=' + name).success(function(data){
             if(!data.success) {
                 $scope.rippleNameForm.ripple_name.$setValidity('domainexists', false);
             } else {
@@ -18,20 +18,16 @@ rippleNames.controller('MainCtrl', function ($scope, $rootScope, $http, reCAPTCH
     $scope.submitForm = function(isValid){
         //form status
         $scope.submitErrors = [];
-        $scope.captchaError;
-
 
         if(isValid){
             $scope.isSubmitting = true;
-            $http.post('https://ripple-name.herokuapp.com/v1/application', $scope.rippleName).success(successCallback).error(errorCallback);
+            $http.post('/v1/application', $scope.rippleName).success(successCallback).error(errorCallback);
         }
 
         function successCallback(data){
             $scope.isSubmitting = false;
 
-            if(data.captchaError) {
-                $scope.captchaError = true;
-            } else if(data.success) {
+            if(data.success) {
                 $scope.submittedSuccessfully = true;
             }
         }
