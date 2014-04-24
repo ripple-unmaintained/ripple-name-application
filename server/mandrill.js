@@ -44,7 +44,7 @@ var Email = function () {
     var message = {
         "text": template(filename + '.txt', data),
         "subject": subject,
-        "from_email": "noreply@ripple.com",
+        "from_email": "support@ripple.com",
         "from_name": "Ripple Name Application",
         "to": [{
                 "email": email,
@@ -53,8 +53,7 @@ var Email = function () {
             }],
         "headers": {
             "Reply-To": "support@ripple.com"
-        },
-        "bcc_address": "support@ripple.com"
+        }
     };
 
     // Only add HTML when available
