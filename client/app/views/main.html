@@ -56,6 +56,7 @@
 
             <div class="form-group">
                 <label for="website">Website</label>
+                <p>Please include http(s)://</p>
                 <input  class="form-control" type="url" ng-model="rippleName.website" name="website" null-if-empty>
                 <p ng-show="rippleNameForm.website.$invalid && !rippleNameForm.website.$pristine" class="help-block">Please enter a valid url</p>
             </div>
